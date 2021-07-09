@@ -1,0 +1,48 @@
+def mergesort(ar)
+
+	if(ar.size == 0)
+		return []
+	end
+	if(ar.size == 1) 
+		return ar
+	end
+	if(ar.size == 2) 
+		if(ar[0] > ar[1]) 
+			return [ar[1],ar[0]]
+		else 
+			return ar
+		end	
+	end
+	
+	ar1 = ar[0...ar.size/2]
+	ar2 = ar[ar.size/2..-1]
+
+	sorted1 = mergesort(ar1)
+	sorted2 = mergesort(ar2)
+
+	i1 = 0;
+	i2 = 0;
+
+	sorted = []
+	while (i1 < sorted1.size || i2 < sorted2.size)
+		if (i1 >= (sorted1.size))
+			sorted << sorted2[i2]
+			i2+=1
+		elsif (i2 >= (sorted2.size))
+			sorted << sorted1[i1]
+			i1+=1
+		elsif(sorted1[i1] > sorted2[i2])
+			sorted << sorted2[i2]
+			i2+=1
+		else
+			sorted << sorted1[i1]
+			i1+=1
+		end
+	end
+	return sorted
+end
+
+testsize = rand(20)
+t = testsize.times.map{rand(100)}
+p t
+p mergesort t
